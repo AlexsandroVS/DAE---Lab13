@@ -51,8 +51,10 @@ public class UsuarioController {
         try {
             usuario.setRole("USER");
             usuarioService.registrarUsuario(usuario);
+            System.out.println("Usuario registrado exitosamente: " + usuario.getUsername());
             return "redirect:/login";
         } catch (Exception e) {
+            System.err.println("Error al registrar el usuario: " + e.getMessage());
             model.addAttribute("error", "Error al registrar el usuario.");
             return "registro";
         }

@@ -1,10 +1,9 @@
-<!-- src/main/resources/templates/home.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home</title>
+  <title>Inicio</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
@@ -12,8 +11,8 @@
   <h1 class="text-3xl font-semibold text-gray-800">Bienvenido a la página de inicio</h1>
 
   <div class="mt-6">
-    <p class="text-lg text-gray-600">¡Bienvenido, <span class="font-semibold">{{authentication.name}}</span>!</p>
-    <p class="text-md text-gray-500">Tu rol es: <span class="font-semibold">{{role}}</span></p>
+    <p class="text-lg text-gray-600">¡Bienvenido, <span class="font-semibold" th:text="${#authentication.name}">usuario</span>!</p>
+    <p class="text-md text-gray-500">Tu rol es: <span class="font-semibold" th:text="${role}">Rol</span></p>
   </div>
 
   <div class="mt-4">
