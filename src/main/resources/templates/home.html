@@ -1,0 +1,24 @@
+<!-- src/main/resources/templates/home.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<div class="max-w-7xl mx-auto p-8">
+  <h1 class="text-3xl font-semibold text-gray-800">Bienvenido a la página de inicio</h1>
+
+  <div class="mt-6">
+    <p class="text-lg text-gray-600">¡Bienvenido, <span class="font-semibold">{{authentication.name}}</span>!</p>
+    <p class="text-md text-gray-500">Tu rol es: <span class="font-semibold">{{role}}</span></p>
+  </div>
+
+  <div class="mt-4">
+    <a href="/logout" class="text-indigo-600 hover:text-indigo-800">Cerrar sesión</a>
+  </div>
+</div>
+</body>
+</html>
