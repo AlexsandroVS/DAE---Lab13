@@ -39,14 +39,14 @@ public class UsuarioController {
         return "home";
     }
 
-    @GetMapping("/registro")
-    public String registroUsuario(Model model) {
+    @GetMapping("/register")
+    public String UsuarioRegister(Model model) {
         model.addAttribute("usuario", new Usuario());
-        return "registro";  // Formulario de registro para usuarios
+        return "user-register";
     }
 
-    @PostMapping("/registro")
-    public String procesarRegistroUsuario(Usuario usuario, Model model) {
+    @PostMapping("/register")
+    public String UsuarioRegisterP(Usuario usuario, Model model) {
         System.out.println("Recibiendo datos: " + usuario.getUsername() + " " + usuario.getPassword());
         try {
             usuario.setRole("USER");
@@ -56,19 +56,19 @@ public class UsuarioController {
         } catch (Exception e) {
             System.err.println("Error al registrar el usuario: " + e.getMessage());
             model.addAttribute("error", "Error al registrar el usuario.");
-            return "registro";
+            return "user-register";
         }
     }
 
 
-    @GetMapping("/registro-admin")
-    public String registroAdmin(Model model) {
+    @GetMapping("/adminRegister")
+    public String RegisterAdmin(Model model) {
         model.addAttribute("usuario", new Usuario());
-        return "registro-admin";
+        return "admin-register";
     }
 
-    @PostMapping("/registro-admin")
-    public String procesarRegistroAdmin(Usuario usuario, Model model) {
+    @PostMapping("/adminRegister")
+    public String adminRegisterP(Usuario usuario, Model model) {
         try {
             usuario.setRole("ADMIN");
 
@@ -77,7 +77,7 @@ public class UsuarioController {
             return "redirect:/login";
         } catch (Exception e) {
             model.addAttribute("error", "Error al registrar el administrador.");
-            return "registro-admin";
+            return "admin-register";
         }
     }
 
@@ -104,7 +104,7 @@ public class UsuarioController {
         }
 
         model.addAttribute("usuarios", usuarios);
-        return "admin";
+        return "dashboard";
     }
 
 
