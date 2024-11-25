@@ -28,17 +28,15 @@ public class ResenaController {
         return resenaService.findAll();
     }
 
-    @PostMapping
+    @PostMapping("/{mangaId}")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public Resena createResena(@RequestBody Resena resena) {
-        // Obtener el nombre de usuario desde el contexto de seguridad
+    public Resena createResena(@PathVariable Long mangaId, @RequestBody Resena resena) {
         User currentUser = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = currentUser.getUsername();
 
-        // Buscar usuario y asociar la reseña
         Usuario usuario = usuarioService.buscarPorUsername(username);
         resena.setUsuario(usuario);
 
-        return resenaService.save(resena);
+        return resenaService.save(mangaId, resena, username);
     }
 }

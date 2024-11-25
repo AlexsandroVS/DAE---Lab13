@@ -1,6 +1,5 @@
 package com.example.Darkness.Configuracion;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,12 +14,13 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/registro", "/login", "/css/**", "/js/**").permitAll()
-                        .requestMatchers("/registro-admin").permitAll()
+                        .requestMatchers("/api/mangas/**").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -32,6 +32,4 @@ public class SecurityConfig {
 
         return http.build();
     }
-
-
 }

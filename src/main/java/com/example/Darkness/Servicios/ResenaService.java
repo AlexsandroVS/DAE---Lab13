@@ -3,15 +3,20 @@ package com.example.Darkness.Servicios;
 import com.example.Darkness.Modelos.Resena;
 import com.example.Darkness.Modelos.Manga;
 import com.example.Darkness.Modelos.Usuario;
+import com.example.Darkness.Repositorios.MangaRepository;
 import com.example.Darkness.Repositorios.ResenaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class ResenaService {
-    @Autowired
-    private ResenaRepository resenaRepository;
+    private final MangaRepository mangaRepository;
+    private final ResenaRepository resenaRepository;
+
+    public ResenaService(MangaRepository mangaRepository, ResenaRepository resenaRepository) {
+        this.mangaRepository = mangaRepository;
+        this.resenaRepository = resenaRepository;
+    }
 
     public List<Resena> findAll() {
         return resenaRepository.findAll();
@@ -25,7 +30,17 @@ public class ResenaService {
         return resenaRepository.findByUsuario(usuario);
     }
 
-    public Resena save(Resena resena) {
+    public Resena save(Long mangaId, Resena resena, String username) {
+        // Buscar el manga por ID
+        Manga manga = mangaRepository.findById(mangaId)
+                .orElseThrow(() -> new RuntimeException("Manga no encontrado"));
+
+        manga.addFavorito(username);
+
+        mangaRepository.save(manga);
+
+        resena.setManga(manga);
+
         return resenaRepository.save(resena);
     }
 

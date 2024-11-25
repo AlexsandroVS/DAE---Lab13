@@ -2,6 +2,8 @@ package com.example.Darkness.Modelos;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import java.util.ArrayList;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,4 +30,15 @@ public class Manga {
 
     @Column(nullable = false)
     private String visibilidad;
+
+    @ElementCollection
+    @CollectionTable(name = "manga_favoritos", joinColumns = @JoinColumn(name = "manga_id"))
+    @Column(name = "usuario")
+    private List<String> favoritos = new ArrayList<>();
+
+    public void addFavorito(String username) {
+        if (!favoritos.contains(username)) {
+            favoritos.add(username);
+        }
+    }
 }

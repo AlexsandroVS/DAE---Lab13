@@ -16,8 +16,8 @@ public class MangaService {
         return mangaRepository.findAll();
     }
 
-    public List<Manga> findByGenero(String genero) {
-        return mangaRepository.findByGenero(genero);
+    public Optional<Manga> findById(Long id) {
+        return mangaRepository.findById(id);
     }
 
     public Manga save(Manga manga) {
@@ -28,7 +28,10 @@ public class MangaService {
         mangaRepository.deleteById(id);
     }
 
-    public Optional<Manga> findById(Long id) {
-        return mangaRepository.findById(id);
+    public Manga markFavorite(Long id, String username) {
+        Manga manga = mangaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Manga no encontrado"));
+        manga.getFavoritos().add(username);
+        return mangaRepository.save(manga);
     }
 }
