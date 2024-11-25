@@ -17,16 +17,17 @@
   <div class="mt-6">
     <h2 class="text-2xl font-semibold text-gray-800">Lista de Mangas</h2>
     <ul class="mt-4 space-y-2">
+      <!-- Iterar sobre la lista de mangas que el controlador pasa a la vista -->
       <li th:each="manga : ${mangas}">
-        <a th:href="@{/api/mangas/{id}(id=${manga.id})}"
-           class="text-indigo-600 hover:underline"
-           th:text="${manga.nombre}">Nombre del Manga</a>
+        <!-- Enlace a la página de detalles del manga -->
+        <a th:href="@{/manga/{id}(id=${manga.id})}" class="text-indigo-600 hover:underline" th:text="${manga.titulo}">Nombre del Manga</a>
+
       </li>
     </ul>
   </div>
 
   <div class="mt-4">
-    <a href="/logout" class="text-indigo-600 hover:text-indigo-800">Cerrar sesión</a>
+    <a href="/logout" class="text-indigo-600 hover:text-red-800">Cerrar <se></se>sión</a>
   </div>
 </div>
 </body>

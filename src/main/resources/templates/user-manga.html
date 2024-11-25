@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalle del Manga</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 font-sans leading-normal tracking-normal">
+<div class="max-w-7xl mx-auto p-8">
+  <h1 class="text-3xl font-semibold text-gray-800">Detalle del Manga</h1>
+
+  <div class="mt-6">
+    <!-- Mostrar imagen del manga -->
+    <div class="flex items-center space-x-6">
+      <img th:src="@{${manga.imagen}}" alt="Imagen del manga" class="w-40 h-60 object-cover rounded-lg shadow-md">
+
+      <div>
+        <!-- Información del manga -->
+        <h2 class="text-2xl font-bold text-gray-800" th:text="${manga.titulo}">Título del Manga</h2>
+        <p class="text-lg text-gray-600 mt-2" th:text="${manga.autor}">Autor: Nombre del Autor</p>
+        <p class="text-lg text-gray-600" th:text="${manga.genero}">Género: Acción</p>
+
+        <div class="mt-4">
+          <h3 class="text-xl font-semibold text-gray-800">Sinopsis:</h3>
+          <p class="text-gray-600 mt-2" th:text="${manga.sinopsis}">Esta es la sinopsis del manga...</p>
+        </div>
+
+        <!-- Favoritos -->
+        <div class="mt-6">
+          <h3 class="text-xl font-semibold text-gray-800">Favoritos:</h3>
+          <ul class="mt-2 text-gray-600">
+            <li th:each="usuario : ${manga.favoritos}" th:text="${usuario}">Usuario1</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Enlace para regresar -->
+    <div class="mt-6">
+      <a href="/" class="text-indigo-600 hover:text-indigo-800">Volver a la lista de mangas</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

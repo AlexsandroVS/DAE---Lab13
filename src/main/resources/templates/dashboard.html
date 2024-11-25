@@ -9,7 +9,9 @@
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
 <div class="max-w-7xl mx-auto p-8">
     <h1 class="text-3xl font-semibold text-gray-700">Administrar Usuarios</h1>
-
+    <div class="mt-4">
+        <a href="/logout" class="text-indigo-600 hover:text-indigo-800">Cerrar sesión</a>
+    </div>
     <form action="/admin/usuarios" method="get" class="mt-6">
         <div class="flex justify-between mb-4">
             <div>
@@ -26,9 +28,9 @@
                 <button type="submit" class="py-2 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700">
                     Filtrar
                 </button>
-                <a href="/admin/usuarios/crear"
+                <a href="/admin/mangas/crear"
                    class="py-2 px-4 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">
-                    Crear Usuario
+                    Crear Mangas
                 </a>
             </div>
         </div>
