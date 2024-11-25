@@ -7,28 +7,56 @@
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
+
 <div class="max-w-7xl mx-auto p-8">
   <h1 class="text-3xl font-semibold text-gray-800">Bienvenido a la página de inicio</h1>
-
-  <div class="mt-6">
+  <div class="mt-6 mb-6">
     <p class="text-lg text-gray-600">¡Bienvenido, <span class="font-semibold" th:text="${#authentication.name}">usuario</span>!</p>
   </div>
+  <a href="/logout"
+     class="py-2 px-6  bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-200 no-underline">
+    Cerrar Sesión
+  </a>
+  <div class="mt-8 bg-white shadow-lg rounded-lg p-6">
+    <h2 class="text-2xl font-semibold text-gray-800 mb-4">Lista de Mangas</h2>
 
-  <div class="mt-6">
-    <h2 class="text-2xl font-semibold text-gray-800">Lista de Mangas</h2>
-    <ul class="mt-4 space-y-2">
-      <!-- Iterar sobre la lista de mangas que el controlador pasa a la vista -->
-      <li th:each="manga : ${mangas}">
-        <!-- Enlace a la página de detalles del manga -->
-        <a th:href="@{/manga/{id}(id=${manga.id})}" class="text-indigo-600 hover:underline" th:text="${manga.titulo}">Nombre del Manga</a>
-
-      </li>
-    </ul>
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white border border-gray-300 rounded-lg shadow-md">
+        <thead class="bg-indigo-600 text-white">
+        <tr>
+          <th class="px-6 py-3 text-left">Título</th>
+          <th class="px-6 py-3 text-left">Género</th>
+          <th class="px-6 py-3 text-center">Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="border-b hover:bg-gray-50">
+          <td class="px-6 py-4">Naruto</td>
+          <td class="px-6 py-4">Shonen</td>
+          <td class="px-6 py-4 text-center">
+            <a href="#" class="text-indigo-600 hover:text-indigo-800">Ver detalles</a>
+          </td>
+        </tr>
+        <tr class="border-b hover:bg-gray-50">
+          <td class="px-6 py-4">One Piece</td>
+          <td class="px-6 py-4">Aventura</td>
+          <td class="px-6 py-4 text-center">
+            <a href="#" class="text-indigo-600 hover:text-indigo-800">Ver detalles</a>
+          </td>
+        </tr>
+        <tr class="border-b hover:bg-gray-50">
+          <td class="px-6 py-4">Attack on Titan</td>
+          <td class="px-6 py-4">Terror</td>
+          <td class="px-6 py-4 text-center">
+            <a href="#" class="text-indigo-600 hover:text-indigo-800">Ver detalles</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
-  <div class="mt-4">
-    <a href="/logout" class="text-indigo-600 hover:text-red-800">Cerrar <se></se>sión</a>
-  </div>
 </div>
+
 </body>
 </html>

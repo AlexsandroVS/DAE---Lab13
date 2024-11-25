@@ -8,16 +8,23 @@
 </head>
 <body class="bg-gray-100 font-sans leading-normal tracking-normal">
 <div class="max-w-7xl mx-auto p-8">
-    <h1 class="text-3xl font-semibold text-gray-700">Administrar Usuarios</h1>
-    <div class="mt-4">
-        <a href="/logout" class="text-indigo-600 hover:text-indigo-800">Cerrar sesión</a>
+
+    <!-- Título principal -->
+    <h1 class="text-3xl font-semibold text-gray-800">Administrar Usuarios</h1>
+
+    <div class="mt-6 flex justify-between items-center">
+        <!-- Botón de Cerrar sesión -->
+        <a href="/logout"
+           class="py-2 px-6 bg-red-600 text-white font-semibold rounded-lg hover:bg-red-700 focus:ring-4 focus:ring-red-200 no-underline">
+            Cerrar Sesión
+        </a>
     </div>
     <form action="/admin/usuarios" method="get" class="mt-6">
-        <div class="flex justify-between mb-4">
-            <div>
+        <div class="flex justify-between mb-6">
+            <div class="w-full sm:w-1/3">
                 <label for="roleFilter" class="text-sm font-medium text-gray-600">Filtrar por rol:</label>
                 <select name="roleFilter" id="roleFilter"
-                        class="mt-1 block px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500">
+                        class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 shadow-sm">
                     <option value="">Todos</option>
                     <option value="USER">Usuarios</option>
                     <option value="ADMIN">Administradores</option>
@@ -25,31 +32,41 @@
             </div>
 
             <div class="flex items-center space-x-4">
-                <button type="submit" class="py-2 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700">
+                <button type="submit" class="py-2 px-4 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:ring-4 focus:ring-indigo-200">
                     Filtrar
                 </button>
-                <a href="/admin/mangas/crear"
-                   class="py-2 px-4 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700">
-                    Crear Mangas
-                </a>
             </div>
         </div>
     </form>
-
-    <div class="mt-8">
-        <h2 class="text-xl font-semibold text-gray-700">Lista de Usuarios</h2>
-        <table class="min-w-full mt-4 table-auto border-collapse">
+    <div class="mt-8 bg-white shadow-lg rounded-lg overflow-hidden">
+        <h2 class="text-xl font-semibold text-gray-800 px-6 py-4 border-b">Lista de Usuarios</h2>
+        <table class="min-w-full mt-4 table-auto border-collapse text-sm text-gray-700">
             <thead>
-            <tr>
-                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Nombre</th>
-                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Rol</th>
-                <th class="px-4 py-2 text-left text-sm font-medium text-gray-600">Acciones</th>
+            <tr class="bg-indigo-600 text-white">
+                <th class="px-6 py-3 text-left">Nombre</th>
+                <th class="px-6 py-3 text-left">Rol</th>
+                <th class="px-6 py-3 text-center">Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <!-- Aquí agregarías tu lógica para iterar sobre los usuarios -->
-
-            <!-- Más usuarios... -->
+            <tr class="border-b hover:bg-gray-50">
+                <td class="px-6 py-4">Juan Pérez</td>
+                <td class="px-6 py-4">Administrador</td>
+                <td class="px-6 py-4 text-center">
+                    <a href="/admin/usuarios/1/detalle" class="text-indigo-600 hover:text-indigo-800">
+                        Ver detalles
+                    </a>
+                </td>
+            </tr>
+            <tr class="border-b hover:bg-gray-50">
+                <td class="px-6 py-4">Ana Gómez</td>
+                <td class="px-6 py-4">Usuario</td>
+                <td class="px-6 py-4 text-center">
+                    <a href="/admin/usuarios/2/detalle" class="text-indigo-600 hover:text-indigo-800">
+                        Ver detalles
+                    </a>
+                </td>
+            </tr>
             </tbody>
         </table>
     </div>

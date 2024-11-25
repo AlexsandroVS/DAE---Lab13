@@ -1,16 +1,12 @@
 package com.example.Darkness.Controladores;
 
 import com.example.Darkness.Modelos.Manga;
-import com.example.Darkness.Modelos.Resena;
 import com.example.Darkness.Servicios.MangaService;
-import com.example.Darkness.Servicios.ResenaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -37,6 +33,7 @@ public class MangaAdminController {
     // Guardar un nuevo manga
     @PostMapping("/guardar")
     public String guardarManga(@ModelAttribute("manga") Manga manga) {
+        // Save the manga object
         mangaService.save(manga);
         return "redirect:/admin/mangas";
     }
@@ -45,7 +42,7 @@ public class MangaAdminController {
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEditarManga(@PathVariable("id") Long id, Model model) {
         Optional<Manga> manga = mangaService.findById(id);
-        model.addAttribute("manga", manga);
+        model.addAttribute("manga", manga.orElse(null));
         return "admin/editar_manga";
     }
 
@@ -68,7 +65,7 @@ public class MangaAdminController {
     @GetMapping("/detalle/{id}")
     public String mostrarDetalleManga(@PathVariable("id") Long id, Model model) {
         Optional<Manga> manga = mangaService.findById(id);
-        model.addAttribute("manga", manga);
+        model.addAttribute("manga", manga.orElse(null));
         return "admin/detalle_manga";
     }
 }

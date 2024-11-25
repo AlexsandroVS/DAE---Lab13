@@ -63,12 +63,24 @@ public class UsuarioController {
             return "user-register";
         }
     }
-    @GetMapping("/manga/{id}")
-    public String verDetalleManga(@PathVariable Long id, Model model) {
-        Optional<Manga> manga = mangaService.findById(id);  // Obtener manga por ID desde el servicio
-        model.addAttribute("manga", manga);  // Agregar manga al modelo
-        return "user-manga";  // El nombre del archivo HTML con el detalle del manga
+    @GetMapping("/register")
+    public String mostrarFormularioRegistro(Model model) {
+        model.addAttribute("usuario", new Usuario());
+        return "user-register"; // Asegúrate de que esta vista exista
     }
+
+    @GetMapping("/manga/{id}")
+    public String getMangaDetails(@PathVariable Long id, Model model) {
+        Optional<Manga> optionalManga = mangaService.findById(id);
+        if (optionalManga.isPresent()) {
+            model.addAttribute("manga", optionalManga.get());
+            return "user-manga";
+        } else {
+            // Maneja el caso de manga no encontrado
+            return "redirect:/error";
+        }
+    }
+
 
 
     @GetMapping("/adminRegister")
@@ -100,22 +112,23 @@ public class UsuarioController {
     public String logout() {
         return "redirect:/login";
     }
+
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/admin/usuarios")
     @PostFilter("filterObject.role == 'USER'")
     @PostAuthorize("hasPermission(returnObject, 'VIEW')")
+
     public String obtenerUsuarios(@RequestParam(required = false) String roleFilter, Model model) {
         List<Usuario> usuarios;
-
         if (roleFilter != null && !roleFilter.isEmpty()) {
             usuarios = usuarioService.obtenerUsuariosPorRol(roleFilter);
         } else {
             usuarios = usuarioService.obtenerTodosUsuarios();
         }
-
         model.addAttribute("usuarios", usuarios);
         return "dashboard";
     }
+
 
 
 }

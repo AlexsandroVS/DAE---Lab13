@@ -11,10 +11,8 @@
   <h1 class="text-3xl font-semibold text-gray-800">Detalle del Manga</h1>
 
   <div class="mt-6">
-    <!-- Mostrar imagen del manga -->
     <div class="flex items-center space-x-6">
-      <img th:src="@{${manga.imagen}}" alt="Imagen del manga" class="w-40 h-60 object-cover rounded-lg shadow-md">
-
+      <!-- Elimina la imagen del manga -->
       <div>
         <!-- Información del manga -->
         <h2 class="text-2xl font-bold text-gray-800" th:text="${manga.titulo}">Título del Manga</h2>
