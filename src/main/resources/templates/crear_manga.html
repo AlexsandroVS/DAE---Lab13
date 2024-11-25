@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crear Manga</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+  <h1>Crear Nuevo Manga</h1>
+
+  <form th:action="@{/admin/mangas/guardar}" method="post">
+    <div class="mb-3">
+      <label for="titulo" class="form-label">Título</label>
+      <input type="text" id="titulo" name="titulo" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="autor" class="form-label">Autor</label>
+      <input type="text" id="autor" name="autor" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="genero" class="form-label">Género</label>
+      <input type="text" id="genero" name="genero" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="sinopsis" class="form-label">Sinopsis</label>
+      <textarea id="sinopsis" name="sinopsis" class="form-control" required></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="imagen" class="form-label">Imagen URL</label>
+      <input type="text" id="imagen" name="imagen" class="form-control" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="visibilidad" class="form-label">Visibilidad</label>
+      <select id="visibilidad" name="visibilidad" class="form-select" required>
+        <option value="PUBLICO">Público</option>
+        <option value="PRIVADO">Privado</option>
+        <option value="EN_CURSO">En Curso</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar Manga</button>
+    <a href="/admin/mangas" class="btn btn-secondary">Cancelar</a>
+  </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Mangas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h1>Lista de Mangas</h1>
+    <a href="/admin/mangas/crear" class="btn btn-success mb-3">Crear Nuevo Manga</a>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Título</th>
+            <th>Autor</th>
+            <th>Género</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="manga : ${mangas}">
+            <td th:text="${manga.titulo}"></td>
+            <td th:text="${manga.autor}"></td>
+            <td th:text="${manga.genero}"></td>
+            <td>
+                <a href="/admin/mangas/detalle/{id}" class="btn btn-info btn-sm">Ver Detalles</a>
+                <a href="/admin/mangas/editar/{id}" class="btn btn-warning btn-sm">Editar</a>
+                <a href="/admin/mangas/eliminar/{id}" class="btn btn-danger btn-sm">Eliminar</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

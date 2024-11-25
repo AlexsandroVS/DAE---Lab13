@@ -11,55 +11,64 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
-@RequestMapping("/admin/manga")
+@RequestMapping("/admin/mangas")
 public class MangaAdminController {
 
     @Autowired
     private MangaService mangaService;
 
-    @Autowired
-    private ResenaService resenaService;
-
-    // Listar todos los mangas
+    // Lista de mangas
     @GetMapping
-    @PreAuthorize("hasRole('ADMIN')")
     public String listarMangas(Model model) {
-        List<Manga> mangas = mangaService.findAll();
-        model.addAttribute("mangas", mangas);
-        return "admin/manga/listar"; // Vista que lista los mangas
-    }
-
-    // Mostrar el formulario para crear un nuevo manga
-    @GetMapping("/crear")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String mostrarFormularioCrearManga(Model model) {
-        model.addAttribute("manga", new Manga());
-        return "admin/manga/crear"; // Vista para crear manga
+        model.addAttribute("mangas", mangaService.findAll());
+        return "admin/lista_mangas";
     }
 
     // Crear un nuevo manga
-    @PostMapping("/crear")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String crearManga(@ModelAttribute Manga manga) {
+    @GetMapping("/crear")
+    public String mostrarFormularioCrearManga(Model model) {
+        model.addAttribute("manga", new Manga());
+        return "admin/crear_manga";
+    }
+
+    // Guardar un nuevo manga
+    @PostMapping("/guardar")
+    public String guardarManga(@ModelAttribute("manga") Manga manga) {
         mangaService.save(manga);
-        return "redirect:/admin/manga"; // Redirigir a la lista de mangas
+        return "redirect:/admin/mangas";
     }
 
-    // Eliminar un manga
+    // Editar un manga
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEditarManga(@PathVariable("id") Long id, Model model) {
+        Optional<Manga> manga = mangaService.findById(id);
+        model.addAttribute("manga", manga);
+        return "admin/editar_manga";
+    }
+
+    // Actualizar manga
+    @PostMapping("/actualizar/{id}")
+    public String actualizarManga(@PathVariable("id") Long id, @ModelAttribute("manga") Manga manga) {
+        manga.setId(id);
+        mangaService.save(manga);
+        return "redirect:/admin/mangas";
+    }
+
+    // Eliminar manga
     @GetMapping("/eliminar/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String eliminarManga(@PathVariable Long id) {
+    public String eliminarManga(@PathVariable("id") Long id) {
         mangaService.deleteById(id);
-        return "redirect:/admin/manga"; // Redirigir a la lista de mangas
+        return "redirect:/admin/mangas";
     }
 
-    // Eliminar una reseña de un usuario
-    @GetMapping("/resena/eliminar/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String eliminarResena(@PathVariable Long id) {
-        resenaService.deleteById(id);
-        return "redirect:/admin/manga"; // Redirigir a la lista de mangas
+    // Detalle del manga
+    @GetMapping("/detalle/{id}")
+    public String mostrarDetalleManga(@PathVariable("id") Long id, Model model) {
+        Optional<Manga> manga = mangaService.findById(id);
+        model.addAttribute("manga", manga);
+        return "admin/detalle_manga";
     }
 }
