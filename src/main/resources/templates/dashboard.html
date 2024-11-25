@@ -19,6 +19,8 @@
             Cerrar Sesión
         </a>
     </div>
+
+    <!-- Filtro de roles -->
     <form action="/admin/usuarios" method="get" class="mt-6">
         <div class="flex justify-between mb-6">
             <div class="w-full sm:w-1/3">
@@ -38,31 +40,25 @@
             </div>
         </div>
     </form>
+
+    <!-- Lista de usuarios -->
     <div class="mt-8 bg-white shadow-lg rounded-lg overflow-hidden">
         <h2 class="text-xl font-semibold text-gray-800 px-6 py-4 border-b">Lista de Usuarios</h2>
         <table class="min-w-full mt-4 table-auto border-collapse text-sm text-gray-700">
             <thead>
             <tr class="bg-indigo-600 text-white">
-                <th class="px-6 py-3 text-left">Nombre</th>
+                <th class="px-6 py-3 text-left">Nombre de Usuario</th>
                 <th class="px-6 py-3 text-left">Rol</th>
                 <th class="px-6 py-3 text-center">Acciones</th>
             </tr>
             </thead>
             <tbody>
-            <tr class="border-b hover:bg-gray-50">
-                <td class="px-6 py-4">Juan Pérez</td>
-                <td class="px-6 py-4">Administrador</td>
+            <!-- Iteración sobre los usuarios -->
+            <tr th:each="usuario : ${usuarios}" class="border-b hover:bg-gray-50">
+                <td class="px-6 py-4" th:text="${usuario.username}">Juan Pérez</td>
+                <td class="px-6 py-4" th:text="${usuario.role}">Administrador</td>
                 <td class="px-6 py-4 text-center">
-                    <a href="/admin/usuarios/1/detalle" class="text-indigo-600 hover:text-indigo-800">
-                        Ver detalles
-                    </a>
-                </td>
-            </tr>
-            <tr class="border-b hover:bg-gray-50">
-                <td class="px-6 py-4">Ana Gómez</td>
-                <td class="px-6 py-4">Usuario</td>
-                <td class="px-6 py-4 text-center">
-                    <a href="/admin/usuarios/2/detalle" class="text-indigo-600 hover:text-indigo-800">
+                    <a href="/admin/usuarios/{usuario.id}/detalle" class="text-indigo-600 hover:text-indigo-800">
                         Ver detalles
                     </a>
                 </td>
